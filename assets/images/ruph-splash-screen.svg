@@ -1,0 +1,21 @@
+<svg viewBox="0 0 1080 2160" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background for splash screen -->
+  <rect width="1080" height="2160" fill="#FFFFFF"/>
+  
+  <!-- App logo container (360x360, centered) -->
+  <g transform="translate(360, 900)">
+    <!-- Blue rounded rectangle background -->
+    <rect width="360" height="360" rx="60" ry="60" fill="#0066FF"/>
+    
+    <!-- White italicized 'r' -->
+    <text 
+      x="180" 
+      y="252" 
+      font-family="Arial, Helvetica, sans-serif" 
+      font-size="245" 
+      font-weight="700" 
+      font-style="italic" 
+      fill="#FFFFFF" 
+      text-anchor="middle">r</text>
+  </g>
+</svg>
