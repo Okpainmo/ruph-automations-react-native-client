@@ -64,7 +64,9 @@ export default function ControllerDetailScreen() {
         }
 
         const response = await axios.get(
-          `https://api.ruphautomations.zedlabs.xyz/api/v1/system/get-controller/${id}`,
+          // `https://api.ruphautomations.zedlabs.xyz/api/v1/system/get-controller/${id}`,
+          `https://api.ruphautomations.xyz/api/v1/system/get-controller/${id}`,
+          // `http://localhost:5000/api/v1/system/get-controller/${id}`,
           {
             headers: {
               Authorization: `Bearer ${user.accessToken}`,

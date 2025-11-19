@@ -73,7 +73,9 @@ export default function ActivateControllerScreen() {
       console.log(accessToken, email);
 
       const response = await axios.patch(
-        `https://api.ruphautomations.zedlabs.xyz/api/v1/system/update-controller/${controllerBatchId}`,
+        // `https://api.ruphautomations.zedlabs.xyz/api/v1/system/update-controller/${controllerBatchId}`,
+        `https://api.ruphautomations.xyz/api/v1/system/update-controller/${controllerBatchId}`,
+        // `http://localhost:5000/api/v1/system/update-controller/${controllerBatchId}`,
         payload,
         {
           headers: {

@@ -50,7 +50,9 @@ export default function SignUpScreen() {
     setLoading(true);
     try {
       const response = await axios.post(
-        'https://api.ruphautomations.zedlabs.xyz/api/v1/auth/register',
+        // 'https://api.ruphautomations.zedlabs.xyz/api/v1/auth/register',
+        'https://api.ruphautomations.xyz/api/v1/auth/register',
+        // 'http://localhost:5000/api/v1/auth/register',
         { name, email, password }
       );
 
