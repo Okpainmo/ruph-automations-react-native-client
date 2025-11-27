@@ -70,7 +70,7 @@ export default function ActivateControllerScreen() {
         isActivated: true, // auto add
       };
 
-      console.log(accessToken, email);
+      // console.log(accessToken, email);
 
       const response = await axios.patch(
         // `https://api.ruphautomations.zedlabs.xyz/api/v1/system/update-controller/${controllerBatchId}`,
@@ -87,7 +87,7 @@ export default function ActivateControllerScreen() {
         }
       );
 
-      console.log('Activation successful:', response.data);
+      // console.log('Activation successful:', response.data);
 
       Alert.alert('Success', 'Controller activated successfully');
       routerNav.push('/(main)/controllers');

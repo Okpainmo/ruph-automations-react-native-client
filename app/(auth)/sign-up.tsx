@@ -56,8 +56,8 @@ export default function SignUpScreen() {
         { name, email, password }
       );
 
-      const { response: data, responseMessage } = response.data;
-      console.log(responseMessage);
+      const { response: data } = response.data;
+      // console.log(responseMessage);
 
       await storeUserData({
         id: data.userProfile.id,
