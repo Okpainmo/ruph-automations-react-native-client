@@ -48,8 +48,8 @@ export default function LoginScreen() {
         { email, password }
       );
 
-      const { response: data, responseMessage } = response.data;
-      console.log(responseMessage);
+      const { response: data /* responseMessage */ } = response.data;
+      // console.log(responseMessage);
 
       await storeUserData({
         id: data.userProfile.id,
@@ -145,6 +145,8 @@ export default function LoginScreen() {
     </SafeAreaView>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   safeContainer: { flex: 1, backgroundColor: '#f9fafb' },

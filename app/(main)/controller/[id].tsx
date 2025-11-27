@@ -35,6 +35,13 @@ interface UserData {
   refreshToken: string;
 }
 
+/* 
+As a very important note, please be clear that the current switching status is inverted - this is due to the current implementation
+on the ESP32 microcontroller programming - which will hopefully be rectified in the near future.
+
+Hence, feel free to sync with the inversion, and use false(0) for true(1) and vice-versa.
+*/
+
 export default function ControllerDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
@@ -81,7 +88,7 @@ export default function ControllerDetailScreen() {
         const newAccessToken = response.data?.response?.accessToken;
         const newRefreshToken = response.data?.response?.refreshToken;
 
-        console.log(fetchedController);
+        // console.log(fetchedController);
 
         if (newAccessToken && newRefreshToken) {
           await AsyncStorage.setItem(
@@ -106,16 +113,45 @@ export default function ControllerDetailScreen() {
     fetchController();
   }, [id]);
 
+  // Fetch relay live state from Firebase
+  useEffect(() => {
+    if (!controller) return;
+
+    const fetchRelayState = async () => {
+      try {
+        const response = await axios.get(
+          'https://andrew-5d2ad-default-rtdb.firebaseio.com/devices/ESP32_B41B3A124B00/relays.json'
+        );
+
+        const data = response.data;
+
+        // Expected: { relay1: false, relay2: false, relay3: false, relay4: false }
+        if (data) {
+          setSwitches({
+            c1: !data.relay1,
+            c2: !data.relay2,
+            c3: !data.relay3,
+            c4: !data.relay4,
+          });
+        }
+      } catch (error: any) {
+        console.error('Error fetching relay state:', error?.message || error);
+      }
+    };
+
+    fetchRelayState();
+  }, [controller]);
+
   // Handle switch toggles
   const handleSwitchChange1 = async (value: boolean) => {
     try {
       const url = String(controller?.circuitEndPoint_1);
       const response = await axios.patch(url, {
-        relay1: value === false ? 1 : 0,
+        relay1: value === false ? 0 : 1,
       });
 
-      console.log(response);
-      console.log(response.status);
+      // console.log(response);
+      // console.log(response.status);
 
       if (response.status === 200) {
         setSwitches({ ...switches, c1: !value });
@@ -131,11 +167,11 @@ export default function ControllerDetailScreen() {
     try {
       const url = String(controller?.circuitEndPoint_2);
       const response = await axios.patch(url, {
-        relay2: value === false ? 1 : 0,
+        relay2: value === false ? 0 : 1,
       });
 
-      console.log(response);
-      console.log(response.status);
+      // console.log(response);
+      // console.log(response.status);
 
       if (response.status === 200) {
         setSwitches({ ...switches, c2: !value });
@@ -151,11 +187,11 @@ export default function ControllerDetailScreen() {
     try {
       const url = String(controller?.circuitEndPoint_3);
       const response = await axios.patch(url, {
-        relay3: value === false ? 1 : 0,
+        relay3: value === false ? 0 : 1,
       });
 
-      console.log(response);
-      console.log(response.status);
+      // console.log(response);
+      // console.log(response.status);
 
       if (response.status === 200) {
         setSwitches({ ...switches, c3: !value });
@@ -171,11 +207,11 @@ export default function ControllerDetailScreen() {
     try {
       const url = String(controller?.circuitEndPoint_4);
       const response = await axios.patch(url, {
-        relay4: value === false ? 1 : 0,
+        relay4: value === false ? 0 : 1,
       });
 
-      console.log(response);
-      console.log(response.status);
+      // console.log(response);
+      // console.log(response.status);
 
       if (response.status === 200) {
         setSwitches({ ...switches, c4: !value });
